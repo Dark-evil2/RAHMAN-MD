@@ -45,7 +45,7 @@ const {
   const path = require('path')
   const prefix = config.PREFIX
   // const { commands } = require('./command');
-  const ownerNumber = ['923015954782']
+  const ownerNumber = ['923493114170']
 
   //=============================================
   const tempDir = path.join(os.tmpdir(), 'cache-temp')
@@ -93,8 +93,8 @@ async function loadSession() {
         console.log('[🔰] Downloading MEGA.nz session...');
         
         // Remove "IK~" prefix if present, otherwise use full SESSION_ID
-        const megaFileId = config.SESSION_ID.startsWith('RAHMAN~') 
-            ? config.SESSION_ID.replace("RAHMAN~", "") 
+        const megaFileId = config.SESSION_ID.startsWith('IMMU~') 
+            ? config.SESSION_ID.replace("IMMU~", "") 
             : config.SESSION_ID;
 
         const filer = File.fromURL(`https://mega.nz/file/${megaFileId}`);
@@ -119,7 +119,7 @@ async function loadSession() {
 //=======SESSION-AUTH==============
 
 async function connectToWA() {
-    console.log("[🔰] RAHMAN-MD Connecting to WhatsApp ⏳️...");
+    console.log("[🔰] IMMU-MD Connecting to WhatsApp ⏳️...");
     
     // Load session if available
     const creds = await loadSession();
@@ -154,7 +154,7 @@ async function connectToWA() {
                 console.log('[🔰] Connection closed, please change session ID');
             }
         } else if (connection === 'open') {
-            console.log('[🔰] RAHMAN MD connected to WhatsApp ✅');
+            console.log('[🔰] IMMU MD connected to WhatsApp ✅');
             
             
             // Load plugins
@@ -173,23 +173,23 @@ async function connectToWA() {
                     const username = config.REPO.split('/').slice(3, 4)[0];
                     const mrfrank = `https://github.com/${username}`;
                     
-                    const upMessage = `‎*𝐑𝐀𝐇𝐌𝐀𝐍-𝐌𝐃 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃 𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋𝐘!*
-‎*╭───━━━━───━━━━──┉┈⚆*
-‎*│• 𝐓𝐘𝐏𝐄 .𝐌𝐄𝐍𝐔 𝐓𝐎 𝐒𝐄𝐄 𝐋𝐈𝐒𝐓 •*
-‎*│• 𝐁𝐎𝐓 𝐀𝐌𝐀𝐙𝐈𝐍𝐆 𝐅𝐄𝐀𝐓𝐔𝐑𝐄𝐒 •*
-‎*│• 📜𝐏𝐑𝐄𝐅𝐈𝐗 : ${prefix}*
-‎*│• ⌨️𝐌𝐎𝐃𝐄 : ${mode}*
-‎*┗───━━━━───━━━━──┉┈⚆*
-‎╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╮
-‎*_ᶠᵒʳ ˡᵃᵗᵉˢᵗ ᵘᵖᵈᵃᵗᵉ ʲᵒⁱⁿ ᵒᵘʳ ᶜʰᵃⁿⁿᵉˡ_*
-‎🔗https://whatsapp.com/channel/0029VaEV2x85kg7Eid9iK43R
-‎
-‎   *_⭐ˢᵗᵃʳ ᵗʰᵉ ʳᵉᵖᵒ_*
-‎🔗https://github.com/RAHMAN-TECH90/RAHMAN-MD
-‎╰╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╯`;
+                    const upMessage = `╭─〔 *🤖 IMMU-MD BOT* 〕  
+├─▸ *Ultra Super Fast Powerfull ⚠️*  
+│     *World Best BOT IMMU-MD* 
+╰─➤ *Your Smart WhatsApp Bot is Ready To use 🍁!*  
+
+- *🖤 Thank You for Choosing IMMU-MD!* 
+
+╭──〔 🔗 *Information* 〕  
+├─ 🧩 *Prefix:* = ${prefix}
+├─ 📢 *Join Channel:*  
+│    https://whatsapp.com/channel/0029Vaq4PRsD38CJKXzwmb42  
+├─ 🌟 *Star the Repo:*  
+│    https://github.com/XRI-DOUBLE07/IMMU-MD
+╰─🚀 *Powered By Iᴍᴀᴅ  Aʟɪ — 𝗜𝗠𝗠𝗨 *`;
                     
                     await conn.sendMessage(conn.user.id, { 
-                        image: { url: `https://files.catbox.moe/84jssf.jpg` }, 
+                        image: { url: `https://i.postimg.cc/xTTgKc2W/IMG-20250801-WA0019.jpg` }, 
                         caption: upMessage 
                     });
                     
@@ -273,7 +273,7 @@ BotActivityFilter(conn);
     }
 
   const newsletterJids = [
-  "120363201214007503@newsletter",
+  "120363341506278064@newsletter",
 ];
   const emojis = ["❤️", "👍", "😮", "😎", "💀"];
 
@@ -340,7 +340,7 @@ BotActivityFilter(conn);
   }
   
   const udp = botNumber.split('@')[0];
-    const immumd = ('923015954782', '923319709781');
+    const immumd = ('923493114170', '923209091966');
     
     const ownerFilev2 = JSON.parse(fs.readFileSync('./assets/sudo.json', 'utf-8'));  
     
@@ -383,11 +383,11 @@ BotActivityFilter(conn);
 // Auto React for all messages (public and owner)
 if (!isReact && config.AUTO_REACT === 'true') {
     const reactions = [
-        '🌼', '❤️', '💐', '🔥', '🏵️', '❣️', '☺️', '🏵️', '💥', '🥀', '❤‍🔥', '🤒', '😩', '💓', 
-        '🤭', '👍', '💚', '😍', '😻', '🙌', '😃', '🌺', '👌', '🧑‍🦰', '👩‍⚕️', '🧑‍⚕️', '😏', 
-        '👩‍🏫', '👨‍💻', '👰‍♀', '🤓', '😇', '🙂', '💕', '❣️', '🙅‍♀️', '💁‍♂️', '🤗', '🙆‍♀️', 
-        '🙋‍♀️', '🤷', '🤷‍♀️', '🤦', '😍', '😯', '💇', '💃', '🚶‍♀️', '💯', '🧶', '😎', '👑', 
-        '💍', '💞', '💖', '🎒', '🥽', '🐻', '🐼', '🐭', '🐣', '🪿', '🦆', '🦊', '🦋', '🦄', 
+        '🌼', '❤️', '💐', '🔥', '🏵️', '❄️', '🧊', '🐳', '💥', '🥀', '❤‍🔥', '🥹', '😩', '🫣', 
+        '🤭', '👻', '👾', '🫶', '😻', '🙌', '🫂', '🫀', '👩‍🦰', '🧑‍🦰', '👩‍⚕️', '🧑‍⚕️', '🧕', 
+        '👩‍🏫', '👨‍💻', '👰‍♀', '🦹🏻‍♀️', '🧟‍♀️', '🧟', '🧞‍♀️', '🧞', '🙅‍♀️', '💁‍♂️', '💁‍♀️', '🙆‍♀️', 
+        '🙋‍♀️', '🤷', '🤷‍♀️', '🤦', '🤦‍♀️', '💇‍♀️', '💇', '💃', '🚶‍♀️', '🚶', '🧶', '🧤', '👑', 
+        '💍', '👝', '💼', '🎒', '🥽', '🐻', '🐼', '🐭', '🐣', '🪿', '🦆', '🦊', '🦋', '🦄', 
         '🪼', '🐋', '🐳', '🦈', '🐍', '🕊️', '🦦', '🦚', '🌱', '🍃', '🎍', '🌿', '☘️', '🍀', 
         '🍁', '🪺', '🍄', '🍄‍🟫', '🪸', '🪨', '🌺', '🪷', '🪻', '🥀', '🌹', '🌷', '💐', '🌾', 
         '🌸', '🌼', '🌻', '🌝', '🌚', '🌕', '🌎', '💫', '🔥', '☃️', '❄️', '🌨️', '🫧', '🍟', 
@@ -920,13 +920,13 @@ if (isBanned) return; // Ignore banned users completely
   }
  /* 
   app.get("/", (req, res) => {
-  res.send("RAHMAN-MD STARTED ✅");
+  res.send("IMMU STARTED ✅");
   });
 */
   app.use(express.static(path.join(__dirname, 'lib')));
 
 app.get('/', (req, res) => {
-  res.redirect('/rahman.html');
+  res.redirect('/immutech.html');
 });
   app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
   setTimeout(() => {
