@@ -1,4 +1,4 @@
-// code by ⿻ ⌜ ɪᴍᴍᴜ ⌟⿻⃮͛🇵🇰𖤐
+// code by ⿻ ⌜ RAHMAN-MD ⌟⿻⃮͛🇵🇰𖤐
 
 const axios = require("axios");
 const { cmd } = require("../command");
@@ -65,9 +65,17 @@ cmd({
 
     await sleep(1000);
 
+    // API request
+    const apiUrl = `https://apis.davidcyriltech.my.id/ssweb?url=${encodeURIComponent(url)}`;
+    const response = await axios.get(apiUrl);
+
+    if (!response.data || !response.data.result) {
+      return reply("❌ Failed to capture screenshot (invalid API response).");
+    }
+
     // Send the actual screenshot
     await conn.sendMessage(from, {
-        image: { url: `https://image.thum.io/get/fullpage/${url}` },
+        image: { url: response.data.result },
         caption: "- 🖼️ *sᴄʀᴇᴇɴsʜᴏᴛ ɢᴇɴᴇʀᴀᴛᴇᴅ*\n\n" +
                 "> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ"
     }, { quoted: mek });

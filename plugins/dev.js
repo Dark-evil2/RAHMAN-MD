@@ -53,7 +53,7 @@ async (conn, mek, m, { from, pushName }) => {
         }, { quoted: mek });
 
         await conn.sendMessage(from, {
-            audio: { url: 'https://github.com/criss-vevo/CRISS-DATA/raw/refs/heads/main/autovoice/menunew.m4a' },
+            audio: { url: 'https://files.catbox.moe/k0em5t.mp3' },
             mimetype: 'audio/mpeg',
             ptt: true
         }, { quoted: mek });

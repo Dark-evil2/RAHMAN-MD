@@ -15,26 +15,23 @@ cmd({
   filename: __filename
 }, async (client, message, { reply, quoted }) => {
   try {
-    // Check if quoted message exists and has media
     const quotedMsg = quoted || message;
     const mimeType = (quotedMsg.msg || quotedMsg).mimetype || '';
     
     if (!mimeType || !mimeType.startsWith('image/')) {
-      return reply("Please reply to an image file (JPEG/PNG)");
+      return reply("❌ Please reply to a valid image (JPEG/PNG)");
     }
 
-    // Download the media
+    // Download media
     const mediaBuffer = await quotedMsg.download();
-    
-    // Get file extension based on mime type
+
+    // Detect extension
     let extension = '';
     if (mimeType.includes('image/jpeg')) extension = '.jpg';
     else if (mimeType.includes('image/png')) extension = '.png';
-    else {
-      return reply("Unsupported image format. Please use JPEG or PNG");
-    }
+    else return reply("❌ Unsupported format. Use JPEG/PNG only.");
 
-    // Create temp file
+    // Temp file save
     const tempFilePath = path.join(os.tmpdir(), `remini_input_${Date.now()}${extension}`);
     fs.writeFileSync(tempFilePath, mediaBuffer);
 
@@ -48,40 +45,45 @@ cmd({
     });
 
     const imageUrl = uploadResponse.data;
-    fs.unlinkSync(tempFilePath); // Clean up temp file
+    fs.unlinkSync(tempFilePath);
 
-    if (!imageUrl) {
-      throw "Failed to upload image to Catbox";
+    if (!imageUrl || !imageUrl.startsWith("http")) {
+      return reply("❌ Failed to upload image to Catbox.");
     }
 
-    // Enhance image using new API
-    const apiUrl = `https://api.kimkiro.my.id/tool/upscale?url=${encodeURIComponent(imageUrl)}`;
-    const response = await axios.get(apiUrl, { 
-      responseType: 'arraybuffer',
-      timeout: 60000 // 1 minute timeout
+    // Call Remini API
+    await reply("🔄 ᴇɴʜᴀɴᴄɪɴɢ ɪᴍᴀɢᴇ ϙᴜᴀʟɪᴛʏ...");
+    const apiUrl = `https://apis.davidcyriltech.my.id/remini?url=${encodeURIComponent(imageUrl)}`;
+    const response = await axios.get(apiUrl, {
+      responseType: "arraybuffer",
+      timeout: 60000
     });
 
-    // Check if response is valid image
     if (!response.data || response.data.length < 100) {
-      throw "API returned invalid image data";
+      return reply("❌ API returned invalid image data.");
     }
 
-    // Save enhanced image
+    // Save output
     const outputPath = path.join(os.tmpdir(), `remini_output_${Date.now()}.jpg`);
     fs.writeFileSync(outputPath, response.data);
 
-    // Send the enhanced image with loading message
-    await reply("🔄 ᴇɴʜᴀɴᴄɪɴɢ ɪᴍᴀɢᴇ ϙᴜᴀʟɪᴛʏ...");
+    // Fancy Caption
+    const fancyCaption = `
+╭───────────────────✦
+│ɪᴍᴀɢᴇ ᴇɴʜᴀɴᴄᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ
+╰───────────────────✦
+    `;
+
+    // Send back enhanced image
     await client.sendMessage(message.chat, {
       image: fs.readFileSync(outputPath),
-      caption: "*✅ ɪᴍᴀɢᴇ ᴇɴʜᴀɴᴄᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ!*",
+      caption: fancyCaption,
     }, { quoted: message });
 
-    // Clean up
     fs.unlinkSync(outputPath);
 
   } catch (error) {
-    console.error('Image Enhancement Error:', error);
-    await reply(`❌ Error: ${error.message || "Failed to enhance image. The image might be too large or the API is unavailable."}`);
+    console.error("Image Enhancement Error:", error);
+    await reply(`❌ Error: ${error.message || "Failed to enhance image. Try again later."}`);
   }
 });

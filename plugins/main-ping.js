@@ -3,10 +3,10 @@ const { cmd, commands } = require('../command');
 
 cmd({
     pattern: "ping",
-    alias: ["speed","pong"],use: '.ping',
-    desc: "Check bot's response time.",
+    alias: ["speed","pong"], use: '.ping',
+    desc: "Check bot's response time with music.",
     category: "main",
-    react: "⚡",
+    react: "🚀",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, sender, reply }) => {
@@ -19,12 +19,10 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         const reactionEmoji = reactionEmojis[Math.floor(Math.random() * reactionEmojis.length)];
         let textEmoji = textEmojis[Math.floor(Math.random() * textEmojis.length)];
 
-        // Ensure reaction and text emojis are different
         while (textEmoji === reactionEmoji) {
             textEmoji = textEmojis[Math.floor(Math.random() * textEmojis.length)];
         }
 
-        // Send reaction using conn.sendMessage()
         await conn.sendMessage(from, {
             react: { text: textEmoji, key: mek.key }
         });
@@ -32,20 +30,18 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         const end = new Date().getTime();
         const responseTime = (end - start) / 1000;
 
-        const text = `*_ʀᴀʜᴍᴀɴ-ᴍᴅ sᴘᴇᴇᴅ.... ${responseTime.toFixed(2)}ᴍs ${reactionEmoji}_*🚀`;
+        const text = `*_ʀᴀʜᴍᴀɴ-ᴍᴅ sᴘᴇᴇᴅ... ${responseTime.toFixed(2)}ᴍs ${reactionEmoji}_*🚀`;
 
+        // Pehle text send
+        await conn.sendMessage(from, { text }, { quoted: mek });
+
+        // 🎶 Add music
+        let musicUrl = "https://files.catbox.moe/k0em5t.mp3"; // updated mp3 link
         await conn.sendMessage(from, {
-            text,
-            contextInfo: {
-                mentionedJid: [sender],
-                forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '‎120363201214007503@newsletter',
-                    newsletterName: "‎𝐑𝐀𝐇𝐌𝐀𝐍-𝐓𝐄𝐂𝐇",
-                    serverMessageId: 143
-                }
-            }
+            audio: { url: musicUrl },
+            mimetype: 'audio/mpeg',
+            ptt: false,
+            fileName: "Rahman-MD-Ping.mp3"
         }, { quoted: mek });
 
     } catch (e) {
@@ -53,25 +49,3 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         reply(`An error occurred: ${e.message}`);
     }
 });
-
-// ping2 
-
-cmd({
-    pattern: "ping2",
-    desc: "Check bot's response time.",
-    category: "main",
-    react: "🍂",
-    filename: __filename
-},
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-    try {
-        const startTime = Date.now()
-        const message = await conn.sendMessage(from, { text: '*ᴘɪɴɢɪɴɢ...*' })
-        const endTime = Date.now()
-        const ping = endTime - startTime
-        await conn.sendMessage(from, { text: `*_ʀᴀʜᴍᴀɴ-ᴍᴅ sᴘᴇᴇᴅ : ${ping}ᴍs_* 🚀` }, { quoted: message })
-    } catch (e) {
-        console.log(e)
-        reply(`${e}`)
-    }
-})

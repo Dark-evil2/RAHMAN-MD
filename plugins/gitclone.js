@@ -8,44 +8,37 @@ cmd({
   react: '📦',
   category: "downloader",
   filename: __filename
-}, async (conn, m, store, {
-  from,
-  quoted,
-  args,
-  reply
-}) => {
-  if (!args[0]) {
-    return reply("❌ Where is the GitHub link?\n\nExample:\n.gitclone https://github.com/username/repository");
-  }
+}, async (conn, m, store, { from, quoted, args, reply }) => {
 
-  if (!/^(https:\/\/)?github\.com\/.+/.test(args[0])) {
-    return reply("⚠️ Invalid GitHub link. Please provide a valid GitHub repository URL.");
-  }
+  if (!args[0]) return reply("❌ *GitHub link missing!* \nExample:\n.gitclone https://github.com/username/repository");
+  if (!/^(https:\/\/)?github\.com\/.+/.test(args[0])) return reply("⚠️ *Invalid GitHub link!*");
 
   try {
     const regex = /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/i;
     const match = args[0].match(regex);
-
-    if (!match) {
-      throw new Error("Invalid GitHub URL.");
-    }
+    if (!match) throw new Error("Invalid GitHub URL.");
 
     const [, username, repo] = match;
     const zipUrl = `https://api.github.com/repos/${username}/${repo}/zipball`;
 
-    // Check if repository exists
     const response = await fetch(zipUrl, { method: "HEAD" });
-    if (!response.ok) {
-      throw new Error("Repository not found.");
-    }
+    if (!response.ok) throw new Error("Repository not found.");
 
     const contentDisposition = response.headers.get("content-disposition");
     const fileName = contentDisposition ? contentDisposition.match(/filename=(.*)/)[1] : `${repo}.zip`;
 
-    // Notify user of the download
-    reply(`*ʟᴏᴀᴅɪɴɢ........*\n\n*ʀᴇᴘᴏsɪᴛᴏʀʏ:* ${username}/${repo}\n*ғɪʟᴇɴᴀᴍᴇ:* ${fileName}\n\n> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ*`);
+    // Ultra-classy, concise, stylish caption
+    const stylishCaption = `
+*╭─❖ɢɪᴛʜᴜʙ ʀᴇᴘᴏ ᴅᴏᴡɴʟᴏᴀᴅ❖─╮*
+*│ 📦 ʀᴇᴘᴏ:* ${username}/${repo}
+*│ 🗂 ғɪʟᴇ:* ${fileName}
+*│ 🔗 ʟɪɴᴋ:* ${args[0]}
+*╰─────────❖─────────╯*
+  𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐘 𝐑𝐀𝐇𝐌𝐀𝐍-𝐌𝐃 
+`;
 
-    // Send the zip file to the user with custom contextInfo
+    reply(stylishCaption);
+
     await conn.sendMessage(from, {
       document: { url: zipUrl },
       fileName: fileName,
@@ -64,6 +57,7 @@ cmd({
 
   } catch (error) {
     console.error("Error:", error);
-    reply("❌ Failed to download the repository. Please try again later.");
+    reply("❌ Repository download failed. Please try again.");
   }
+
 });

@@ -4,7 +4,7 @@ const { cmd } = require('../command');
 const SMS_API = "https://shadowscriptz.xyz/public_apis/smsbomberapi.php?num=";
 
 cmd({
-    pattern: "bomb",
+    pattern: "bomber",
     react: "👿",
     desc: "Trigger SMS bombing (Owner Only)",
     category: "main",

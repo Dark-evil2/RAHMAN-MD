@@ -1,6 +1,6 @@
 const config = require('../config');
 const { cmd } = require('../command');
-const { ytsearch, ytmp3, ytmp4 } = require('@dark-yasiya/yt-dl.js'); 
+const { ytsearch } = require('@dark-yasiya/yt-dl.js'); 
 const converter = require('../data/play-converter');
 const fetch = require('node-fetch');
 
@@ -25,30 +25,16 @@ cmd({
             ytUrl = yt.results[0].url;
         }
 
-        const apiUrl = `https://jawad-tech.vercel.app/download/ytmp3?url=${encodeURIComponent(ytUrl)}`;
+        const apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(ytUrl)}`;
         const res = await fetch(apiUrl);
         const data = await res.json();
 
-        if (!data?.result) return reply("❌ Download failed. Try again later.");
+        if (!data?.result?.downloadUrl) return reply("❌ Download failed. Try again later.");
 
-        // Step 4: Download audio buffer
-        const audioRes = await fetch(data.result);
-        const audioBuffer = await audioRes.buffer();
-
-        // Step 5: Convert to MP3 using toAudio
-        let convertedAudio;
-        try {
-            convertedAudio = await converter.toAudio(audioBuffer, 'mp4');
-        } catch (err) {
-            console.error('Audio conversion failed:', err);
-            return reply("❌ Audio conversion failed. Please try another song.");
-        }
-
-        // Step 6: Send converted audio
         await conn.sendMessage(from, {
-            audio: convertedAudio,
+            audio: { url: data.result.downloadUrl },
             mimetype: "audio/mpeg",
-            fileName: `${data.metadata?.title || 'song'}.mp3`
+            fileName: `${data.result.title || 'song'}.mp3`
         }, { quoted: mek });
 
     } catch (error) {
@@ -104,7 +90,6 @@ cmd({
     try {
         if (!q) return reply("Please provide a song name\nExample: .play2 Tum Hi Ho");
 
-        // Step 1: Search YouTube
         await conn.sendMessage(from, { text: "🔍 Sᴇᴀʀᴄʜɪɴɢ ғᴏʀ ʏᴏᴜʀ sᴏɴɢ..." }, { quoted: mek });
         const yt = await ytsearch(q);
         if (!yt?.results?.length) return reply("❌ No results found. Try a different search term.");
@@ -114,52 +99,35 @@ cmd({
         const caption =
 `‎*_ʏᴛ ᴀᴜᴅɪᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
 ‎*╭━━━━━━━━━━━━━━━━━━๏*
-‎*┇*๏ *ᴛɪᴛʟᴇ:*    ${title}
+‎*┇*๏ *ᴛɪᴛʟᴇ:*    ${vid.title}
 ‎*┇*๏ *ᴅᴜʀᴀᴛɪᴏɴ:* ${vid.timestamp}
 ‎*┇*๏ *ᴠɪᴇᴡs:* ${vid.views}
-‎*┇* ๏ *ᴀᴜᴛʜᴏʀ:* ${vid.author.name}
+‎*┇*๏ *ᴀᴜᴛʜᴏʀ:* ${vid.author.name}
 ‎*╰━━━━━━━━━━━━━━━━━━๏*
 ‎*╭────────────────━┈⍟*
 ‎┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
 ‎*╰────────────────━┈⍟*`;
 
-        // Step 2: Send video info with thumbnail
         await conn.sendMessage(from, {
             image: { url: vid.thumbnail },
             caption
         }, { quoted: mek });
 
-        // Step 3: Fetch audio URL
-        const apiUrl = `https://api-aswin-sparky.koyeb.app/api/downloader/song?search=${encodeURIComponent(vid.url)}`;
+        const apiUrl = `https://apis.davidcyriltech.my.id/play?query=${encodeURIComponent(q)}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 
-        if (!data?.status || !data?.data?.downloadURL) {
+        if (!data?.status || !data?.result?.downloadUrl) {
             return reply("❌ Failed to fetch audio. Try again later.");
         }
 
-        // Step 4: Download audio buffer
-        const audioRes = await fetch(data.data.downloadURL);
-        const audioBuffer = await audioRes.buffer();
-
-        // Step 5: Convert to MP3 using toAudio
-        let convertedAudio;
-        try {
-            convertedAudio = await converter.toAudio(audioBuffer, 'mp4');
-        } catch (err) {
-            console.error('Audio conversion failed:', err);
-            return reply("❌ Audio conversion failed. Please try another song.");
-        }
-
-        // Step 6: Send converted audio
         await conn.sendMessage(from, {
-            audio: convertedAudio,
+            audio: { url: data.result.downloadUrl },
             mimetype: 'audio/mpeg',
             ptt: false,
             fileName: `${vid.title}.mp3`.replace(/[^\w\s.-]/gi, '')
         }, { quoted: mek });
 
-        // Step 7: React success
         await conn.sendMessage(from, { react: { text: "✅", key: mek.key } });
 
     } catch (error) {
@@ -177,7 +145,7 @@ cmd({
     category: "download", 
     use: '.play2 <Youtube URL or Name>', 
     filename: __filename }, 
-    async (conn, mek, m, { from, prefix, quoted, q, reply }) => { 
+    async (conn, mek, m, { from, q, reply }) => { 
         try {
             if (!q) return await reply("Please provide a YouTube URL or video name.");
 
@@ -191,7 +159,7 @@ cmd({
 ‎*┇*๏ *ᴛɪᴛʟᴇ:* ${yts.title}
 ‎*┇*๏ *ᴅᴜʀᴀᴛɪᴏɴ:* ${yts.timestamp}
 ‎*┇*๏ *ᴠɪᴇᴡs:* ${yts.views}
-‎*┇* ๏ *ᴀᴜᴛʜᴏʀ:* ${yts.author.name}
+‎*┇*๏ *ᴀᴜᴛʜᴏʀ:* ${yts.author.name}
 ‎*╰━━━━━━━━━━━━━━━━━━๏*
 
 ‎🔢 *ʀᴇᴘʟʏ ᴡɪᴛʜ ʙᴇʟᴏᴡ ɴᴜᴍʙᴇʀ*
@@ -201,7 +169,6 @@ cmd({
 *‎4 ║❯❯ ᴅᴏᴄᴜᴍᴇɴᴛ (ᴍᴘ4) 📁*
 *‎5 ║❯❯ ᴅᴏᴄᴜᴍᴇɴᴛ (ᴍᴘ3) 📃*‎`;
 
-            // Send video details with thumbnail
             const sentMsg = await conn.sendMessage(from, { 
                 image: { url: yts.thumbnail }, 
                 caption: ytmsg 
@@ -210,7 +177,6 @@ cmd({
             const messageID = sentMsg.key.id;
             let responded = false;
 
-            // Create a listener for the reply
             const replyHandler = async (msgData) => {
                 const receivedMsg = msgData.messages[0];
                 if (!receivedMsg.message || responded) return;
@@ -236,82 +202,45 @@ cmd({
                     });
 
                     try {
-                        // Get fresh download URL for each request
-                        const apiResponse = await fetch(`https://jawad-tech.vercel.app/download/ytmp4?url=${encodeURIComponent(yts.url)}`);
+                        const apiResponse = await fetch(`https://apis.davidcyriltech.my.id/song?query=${encodeURIComponent(yts.title)}`);
                         const apiData = await apiResponse.json();
                         
-                        if (!apiData.status || !apiData.result.download) {
+                        if (!apiData.status || !apiData.result?.downloadUrl) {
                             throw new Error("Failed to get download URL");
                         }
 
-                        const downloadUrl = apiData.result.download;
+                        const downloadUrl = apiData.result.downloadUrl;
                         const sanitizedTitle = yts.title.replace(/[^\w\s]/gi, '').substring(0, 50);
 
-                        // Download the media file first
                         const mediaRes = await fetch(downloadUrl);
                         const mediaBuffer = await mediaRes.buffer();
 
                         switch (receivedText) {
                             case "1":
-                                // Video download (no conversion needed)
                                 await conn.sendMessage(from, { 
                                     video: mediaBuffer,
-                                    caption: "> *Powered By IMMU MD 🤍*"
+                                    caption: "> *Powɘʀɘɗ ɓƴ Rʌʜɱʌŋ-ɱɗ*"
                                 }, { quoted: receivedMsg });
                                 break;
                                 
                             case "2":
-                                // Audio download (convert to compressed MP3)
-                                try {
-                                    const convertedAudio = await converter.toAudio(mediaBuffer, 'mp4', {
-                                        bitrate: '96k', // Lower bitrate for smaller size
-                                        sampleRate: 22050, // Lower sample rate
-                                        channels: 1 // Mono instead of stereo
-                                    });
-                                    await conn.sendMessage(from, { 
-                                        audio: convertedAudio,
-                                        mimetype: "audio/mpeg",
-                                        fileName: `${sanitizedTitle}.mp3`
-                                    }, { quoted: receivedMsg });
-                                } catch (convError) {
-                                    console.error('Audio conversion failed:', convError);
-                                    // Fallback to original with lower quality
-                                    const fallbackAudio = await converter.toAudio(mediaBuffer, 'mp4');
-                                    await conn.sendMessage(from, { 
-                                        audio: fallbackAudio,
-                                        mimetype: "audio/mpeg",
-                                        fileName: `${sanitizedTitle}.mp3`
-                                    }, { quoted: receivedMsg });
-                                }
+                                await conn.sendMessage(from, { 
+                                    audio: mediaBuffer,
+                                    mimetype: "audio/mpeg",
+                                    fileName: `${sanitizedTitle}.mp3`
+                                }, { quoted: receivedMsg });
                                 break;
                                 
                             case "3":
-                                // Voice note (PTT - convert to compressed OPUS)
-                                try {
-                                    const convertedPTT = await converter.toPTT(mediaBuffer, 'mp4', {
-                                        bitrate: '64k', // Very low bitrate for voice
-                                        frameSize: 20, // Smaller frame size
-                                        complexity: 5 // Lower complexity
-                                    });
-                                    await conn.sendMessage(from, { 
-                                        audio: convertedPTT,
-                                        mimetype: "audio/ogg; codecs=opus",
-                                        ptt: true,
-                                        fileName: `${sanitizedTitle}.opus`
-                                    }, { quoted: receivedMsg });
-                                } catch (pttError) {
-                                    console.error('PTT conversion failed:', pttError);
-                                    // Fallback to regular compressed audio
-                                    const fallbackPTT = await converter.toPTT(mediaBuffer, 'mp4');
-                                    await conn.sendMessage(from, { 
-                                        audio: fallbackPTT,
-                                        ptt: true
-                                    }, { quoted: receivedMsg });
-                                }
+                                await conn.sendMessage(from, { 
+                                    audio: mediaBuffer,
+                                    mimetype: "audio/ogg; codecs=opus",
+                                    ptt: true,
+                                    fileName: `${sanitizedTitle}.opus`
+                                }, { quoted: receivedMsg });
                                 break;
                                 
                             case "4":
-                                // Document (Video - no conversion needed)
                                 await conn.sendMessage(from, { 
                                     document: mediaBuffer,
                                     mimetype: "video/mp4",
@@ -320,28 +249,11 @@ cmd({
                                 break;
                                 
                             case "5":
-                                // Document (Audio - convert to compressed MP3)
-                                try {
-                                    const convertedAudio = await converter.toAudio(mediaBuffer, 'mp4', {
-                                        bitrate: '96k',
-                                        sampleRate: 22050,
-                                        channels: 1
-                                    });
-                                    await conn.sendMessage(from, { 
-                                        document: convertedAudio,
-                                        mimetype: "audio/mpeg",
-                                        fileName: `${sanitizedTitle}.mp3`
-                                    }, { quoted: receivedMsg });
-                                } catch (convError) {
-                                    console.error('Audio conversion failed:', convError);
-                                    // Fallback to original with lower quality
-                                    const fallbackAudio = await converter.toAudio(mediaBuffer, 'mp4');
-                                    await conn.sendMessage(from, { 
-                                        document: fallbackAudio,
-                                        mimetype: "audio/mpeg",
-                                        fileName: `${sanitizedTitle}.mp3`
-                                    }, { quoted: receivedMsg });
-                                }
+                                await conn.sendMessage(from, { 
+                                    document: mediaBuffer,
+                                    mimetype: "audio/mpeg",
+                                    fileName: `${sanitizedTitle}.mp3`
+                                }, { quoted: receivedMsg });
                                 break;
                         }
                     } catch (error) {
@@ -355,7 +267,6 @@ cmd({
 
             conn.ev.on("messages.upsert", replyHandler);
 
-            // Set timeout to remove listener after 1 minute (silently)
             setTimeout(() => {
                 if (!responded) {
                     conn.ev.off("messages.upsert", replyHandler);
