@@ -5,12 +5,12 @@ const { ytsearch } = require('@dark-yasiya/yt-dl.js');
 
 // 🎬 YouTube Video Downloader (song) → David Cyril API
 cmd({
-    pattern: "song",
-    alias: ["video", "ytv"],
+    pattern: "song2",
+    alias: ["video2", "ytv2"],
     react: "🎬",
     desc: "Download YouTube video",
     category: "downloader",
-    use: ".song <query/url>",
+    use: ".song2 <query/url>",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
@@ -59,14 +59,14 @@ cmd({
 });
 
 
-// 🎥 YouTube Video Downloader (video2) → NexOracle API
+// 🎥 YouTube Video Downloader
 cmd({ 
-    pattern: "video2", 
-    alias: ["song2", "ytv2"], 
+    pattern: "video", 
+    alias: ["song", "ytv"], 
     react: "🎥", 
-    desc: "Download YouTube video (API v2 NexOracle)", 
+    desc: "Download YouTube video", 
     category: "main", 
-    use: ".video2 <query/url>", 
+    use: ".video <query/url>", 
     filename: __filename 
 }, async (conn, mek, m, { from, q, reply }) => { 
     try { 
@@ -77,7 +77,7 @@ cmd({
         
         const yts = yt.results[0];
         // 🔑 Fixed API (NexOracle)
-        const apiUrl = `https://api.nexoracle.com/downloader/yt-video2?apikey=58b3609c238b2b6bb6&url=${encodeURIComponent(yts.url)}`;
+        const apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
         
         const response = await fetch(apiUrl);
         const data = await response.json();
