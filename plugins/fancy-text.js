@@ -14,42 +14,21 @@ cmd({
       return reply("❎ Please provide text to convert into fancy fonts.\n\n*Example:* .fancy Hello");
     }
 
-    // APIs
-    const apis = [
-      `https://www.dark-yasiya-api.site/other/font?text=${encodeURIComponent(q)}`,
-      `https://api.nexoracle.com/fancyfont?text=${encodeURIComponent(q)}`,
-      `https://vihangayt.me/tools/fancy?text=${encodeURIComponent(q)}`
-    ];
-
-    let data;
-    for (let api of apis) {
-      try {
-        const res = await axios.get(api);
-        if (res.data && res.data.result && Array.isArray(res.data.result)) {
-          data = res.data;
-          break;
-        }
-      } catch (e) {
-        console.log(`⚠️ API failed: ${api}`);
-      }
+    const apiUrl = `https://www.dark-yasiya-api.site/other/font?text=${encodeURIComponent(q)}`;
+    const response = await axios.get(apiUrl);
+    
+    if (!response.data.status) {
+      return reply("❌ Error fetching fonts. Please try again later.");
     }
 
-    if (!data) {
-      return reply("❌ All APIs failed. Please try again later.");
-    }
-
-    // Format fancy fonts
-    let fonts = "";
-    data.result.forEach((item, index) => {
-      fonts += `*${index + 1}. ${item.name || "Style"}*\n${item.result}\n\n`;
-    });
-
-    const resultText = `✨ *𝐅𝐀𝐍𝐂𝐘 𝐅𝐎𝐍𝐓 𝐂𝐎𝐍𝐕𝐄𝐑𝐓𝐄𝐑* ✨\n\n${fonts}\n> 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐑𝐚𝐡𝐦𝐚𝐧-𝐓𝐞𝐜𝐡`;
+    const fonts = response.data.result.map(item => `*${item.name}:*\n${item.result}`).join("\n\n");
+    const resultText = `*ғᴀɴᴄʏ ғᴏɴᴛs ᴄᴏɴᴠᴇʀᴛᴇʀ*  \n\n${fonts}\n\n‎*╭──────────────────━┈⍟*
+‎┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴛᴇᴄʜ_* 
+‎*╰──────────────────━┈⍟*`;
 
     await conn.sendMessage(from, { text: resultText }, { quoted: m });
-
   } catch (error) {
-    console.error("❌ Error in fancy command:", error.message || error);
+    console.error("❌ Error in fancy command:", error);
     reply("⚠️ An error occurred while fetching fonts.");
   }
 });

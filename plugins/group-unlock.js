@@ -17,7 +17,7 @@ async (conn, mek, m, { from, isGroup, isAdmins, isBotAdmins, reply }) => {
         if (!isBotAdmins) return reply("❌ I need to be an admin to unlock the group.");
 
         await conn.groupSettingUpdate(from, "unlocked");
-        reply("gяσυρ нαs вεεη υηℓσcкε∂. ηεω мεмвεяs cαη ησω נσιη. 🔓");
+        reply("✅ Group has been unlocked. New members can now join.");
     } catch (e) {
         console.error("Error unlocking group:", e);
         reply("❌ Failed to unlock the group. Please try again.");

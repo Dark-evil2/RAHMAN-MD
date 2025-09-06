@@ -22,7 +22,7 @@ async (conn, mek, m, {
 
         await conn.groupRevokeInvite(from);
         await conn.sendMessage(from, {
-            text: `✅ *gяσυρ ℓιηк нαs вεεη яεsεт sυccεssғυℓℓү!*`
+            text: `✅ *Group Link has been reset successfully!*`
         }, { quoted: mek });
 
     } catch (err) {

@@ -1,6 +1,6 @@
 const config = require('../config')
-const { cmd } = require('../command')
-const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('../lib/functions')
+const { cmd, commands } = require('../command')
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson} = require('../lib/functions')
 
 cmd({
     pattern: "unmute",
@@ -13,15 +13,11 @@ cmd({
 async (conn, mek, m, { from, isGroup, senderNumber, isAdmins, isBotAdmins, reply }) => {
     try {
         if (!isGroup) return reply("❌ This command can only be used in groups.");
-
-        // ✅ Check: Admin OR Developer
-        const isDev = senderNumber === config.OWNER_NUMBER || senderNumber === config.DEV;
-        if (!isAdmins && !isDev) return reply("❌ Only group admins or developer can use this command.");
-
+        if (!isAdmins) return reply("❌ Only group admins can use this command.");
         if (!isBotAdmins) return reply("❌ I need to be an admin to unmute the group.");
 
         await conn.groupSettingUpdate(from, "not_announcement");
-        reply("✅ Group has been unmuted. Everyone can send messages 🔓");
+        reply("✅ Group has been unmuted. Everyone can send messages.");
     } catch (e) {
         console.error("Error unmuting group:", e);
         reply("❌ Failed to unmute the group. Please try again.");

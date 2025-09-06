@@ -8,7 +8,7 @@ cmd({
     pattern: "play4", 
     alias: ["yta4"], 
     react: "☘️", 
-    desc: "Download YouTube song via IMMU MD API", 
+    desc: "Download YouTube song via RAHMAN MD API", 
     category: "main", 
     use: '.play2 <query or youtube url>', 
     filename: __filename 
@@ -59,7 +59,7 @@ cmd({
         if (!yt.results.length) return reply("No results found!");
 
         const song = yt.results[0];
-        const apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(song.url)}`;
+        const apiUrl = `https://api.davidcyriltech.my.id/download/ytmp3?url=${encodeURIComponent(song.url)}`;
         
         const res = await fetch(apiUrl);
         const data = await res.json();
@@ -113,7 +113,7 @@ cmd({
             caption
         }, { quoted: mek });
 
-        const apiUrl = `https://apis.davidcyriltech.my.id/play?query=${encodeURIComponent(q)}`;
+        const apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(q)}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 

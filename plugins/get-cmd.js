@@ -10,14 +10,9 @@ cmd({
     react: "📜",
     filename: __filename
 },
-async (conn, mek, m, { from, args, reply, sender }) => {
+async (conn, mek, m, { from, args, reply, isOwner }) => {
     try {
-        // Strict JID restriction
-        const allowedJid = "923015954782@s.whatsapp.net";
-        if (sender !== allowedJid) {
-            return reply("❌ Access Denied! This command is restricted.");
-        }
-
+        if (!isOwner) return reply("❌ You don't have permission to use this command!");
         if (!args[0]) return reply("❌ Please provide a command name. Example: `.get alive`");
 
         const commandName = args[0].toLowerCase();
@@ -38,17 +33,17 @@ async (conn, mek, m, { from, args, reply, sender }) => {
         }
 
         // Formatted caption with truncated code
-        const formattedCode = `⬤───〔 *📜 Command Source* 〕───⬤
+        const formattedCode = `⬤───〔 *📜 Cᴏᴍᴍᴀɴᴅ Sᴏᴜʀᴄᴇ* 〕───⬤
 \`\`\`js
 ${truncatedCode}
 \`\`\`
 ╰──────────⊷  
-⚡ Full file sent below 📂  
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ`;
+Fᴜʟʟ ғɪʟᴇ sᴇɴᴛ ʙᴇʟᴏᴡ 📂  
+ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴛᴇᴄʜ_*`;
 
         // Send image with truncated source code
         await conn.sendMessage(from, { 
-            image: { url: `https://files.catbox.moe/84jssf.jpg` },
+            image: { url: `https://files.catbox.moe/t3p1at.jpg` },  // Image URL
             caption: formattedCode,
             contextInfo: {
                 mentionedJid: [m.sender],
@@ -56,7 +51,7 @@ ${truncatedCode}
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363201214007503@newsletter',
-                    newsletterName: '𝐑𝐀𝐇𝐌𝐀𝐍-𝐓𝐄𝐂𝐇',
+                    newsletterName: 'ʀᴀʜᴍᴀɴ-ᴛᴇᴄʜ',
                     serverMessageId: 143
                 }
             }
