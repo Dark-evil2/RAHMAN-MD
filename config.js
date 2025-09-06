@@ -10,7 +10,7 @@ function convertToBool(text, fault = 'true') {
 
 module.exports = {
     // ===== BOT CORE SETTINGS =====
-    SESSION_ID: process.env.SESSION_ID || "",  // Your bot's session ID (keep it secure)
+    SESSION_ID: process.env.SESSION_ID || "IMMU~LOglzYZB#QJr26cgiVEkY4Nw-WK6ULJrgeDfbHyk97zpYzruqE-Y",  // Your bot's session ID (keep it secure)
     PREFIX: getConfig("PREFIX") || ".",  // Command prefix (e.g., "., / ! * - +")
     CHATBOT: getConfig("CHATBOT") || "on", // on/off chat bot 
     BOT_NAME: process.env.BOT_NAME || getConfig("BOT_NAME") || "𝐑𝐀𝐇𝐌𝐀𝐍-𝐌𝐃",  // Bot's display name
@@ -38,7 +38,7 @@ module.exports = {
     STICKER_NAME: process.env.STICKER_NAME || "𝐑𝐀𝐇𝐌𝐀𝐍-𝐌𝐃",     // Sticker pack name
     AUTO_STICKER: process.env.AUTO_STICKER || "false",          // Auto-send stickers?
     // ===== MEDIA & AUTOMATION =====
-    AUTO_RECORDING: process.env.AUTO_RECORDING || "false",      // Auto-record voice notes?
+    AUTO_RECORDING: process.env.AUTO_RECORDING || "true",      // Auto-record voice notes?
     AUTO_TYPING: process.env.AUTO_TYPING || "false",            // Show typing indicator?
     MENTION_REPLY: process.env.MENTION_REPLY || "false",   // reply on mentioned message 
     MENU_IMAGE_URL: getConfig("MENU_IMAGE_URL") || "https://files.catbox.moe/84jssf.jpg",  // Bot's "alive" menu mention image
@@ -60,7 +60,7 @@ module.exports = {
     ALWAYS_ONLINE: process.env.ALWAYS_ONLINE || "false",        // Show bot as always online?
     AUTO_STATUS_REACT: process.env.AUTO_STATUS_REACT || "true", // React to status updates?
     AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "true", // VIEW to status updates?
-    AUTO_BIO: process.env.AUTO_BIO || "false", // ture to get auto bio 
+    AUTO_BIO: process.env.AUTO_BIO || "true", // ture to get auto bio 
     WELCOME: process.env.WELCOME || "false", // true to get welcome in groups 
     GOODBYE: process.env.GOODBYE || "false", // true to get goodbye in groups 
     ADMIN_ACTION: process.env.ADMIN_ACTION || "false", // true if want see admin activity 
