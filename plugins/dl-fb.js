@@ -21,15 +21,15 @@ cmd({
 
     let downloadLink;
 
-    // 1️⃣ DavidCyril API
+    // 1️⃣ sandarux API
     try {
-      const dcApi = `https://apis.davidcyriltech.my.id/download/fb?url=${encodeURIComponent(fbUrl)}`;
+      const dcApi = `https://apis.sandarux.sbs/api/fbnew/facebook?url=${encodeURIComponent(fbUrl)}`;
       const { data } = await axios.get(dcApi);
       if (data?.result?.hd || data?.result?.sd) {
         downloadLink = data.result.hd || data.result.sd;
       }
     } catch (e) {
-      console.log("DavidCyril API failed, trying Nexoracle v1...");
+      console.log("Sandarux API failed, trying Nexoracle v1...");
     }
 
     // 2️⃣ Nexoracle v1

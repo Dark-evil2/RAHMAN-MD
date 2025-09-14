@@ -113,7 +113,7 @@ cmd({
             caption
         }, { quoted: mek });
 
-        const apiUrl = `https://api.princetechn.com/api/download/ytmp3?apikey=prince&url=${encodeURIComponent(q)}`;
+        const apiUrl = `https://apis.sandarux.sbs/api/ytmp3/ytdown?url=${encodeURIComponent(q)}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 
@@ -202,7 +202,7 @@ cmd({
                     });
 
                     try {
-                        const apiResponse = await fetch(`https://api.princetechn.com/api/download/mp3?apikey=prince&url=${encodeURIComponent(yts.title)}`);
+                        const apiResponse = await fetch(`https://apis.sandarux.sbs/api/download/ytmp4?url=${encodeURIComponent(yts.title)}`);
                         const apiData = await apiResponse.json();
                         
                         if (!apiData.status || !apiData.result?.downloadUrl) {
