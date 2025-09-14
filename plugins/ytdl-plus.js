@@ -16,7 +16,7 @@ cmd({
     // ⏳ Processing reaction
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const url = `https://api.princetechn.com/api/download/dlmp4?apikey=prince&url=${encodeURIComponent(q)}`;
+    const url = `https://apis.davidcyriltech.my.id/song?query=${encodeURIComponent(q)}`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -58,7 +58,7 @@ cmd({
     // ⏳ Processing reaction
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const url = `https://api.princetechn.com/api/download/yta?apikey=prince&url=${encodeURIComponent(q)}`;
+    const url = `https://apis.davidcyriltech.my.id/play?query=${encodeURIComponent(q)}`;
     const res = await fetch(url);
     const data = await res.json();
 

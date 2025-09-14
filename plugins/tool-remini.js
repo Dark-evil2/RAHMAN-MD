@@ -53,7 +53,7 @@ cmd({
 
     // Call Remini API
     await reply("🔄 ᴇɴʜᴀɴᴄɪɴɢ ɪᴍᴀɢᴇ ϙᴜᴀʟɪᴛʏ...");
-    const apiUrl = `https://api.princetechn.com/api/tools/remini?apikey=prince&url=${encodeURIComponent(imageUrl)}`;
+    const apiUrl = `https://apis.davidcyriltech.my.id/remini?url=${encodeURIComponent(imageUrl)}`;
     const response = await axios.get(apiUrl, {
       responseType: "arraybuffer",
       timeout: 60000

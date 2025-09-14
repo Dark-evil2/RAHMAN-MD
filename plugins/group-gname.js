@@ -18,7 +18,7 @@ async (conn, mek, m, { from, isGroup, isAdmins, isBotAdmins, args, q, reply }) =
         if (!q) return reply("❌ Please provide a new group name.");
 
         await conn.groupUpdateSubject(from, q);
-        reply(`✅ Group name has been updated to: *${q}*`);
+        reply(`✅ ɢʀᴏᴜᴘ ɴᴀᴍᴇ ʜᴀs ʙᴇᴇɴ ᴜᴘᴅᴀᴛᴇᴅ ᴛᴏ: *${q}*`);
     } catch (e) {
         console.error("Error updating group name:", e);
         reply("❌ Failed to update the group name. Please try again.");

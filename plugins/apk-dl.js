@@ -72,7 +72,7 @@ cmd({
     const apkBuffer = Buffer.from(apkResponse.data, 'binary');
 
     // Prepare the message with APK details
-    const message = `> *_© ᴘσωєʀє∂ ву яαнмαη м∂-*`;
+    const message = `> *_© ᴘσωєʀє∂ ву яαнмαη м∂_*`;
      
 
     // Send the APK file as a document

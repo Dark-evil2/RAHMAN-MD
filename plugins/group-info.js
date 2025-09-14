@@ -37,13 +37,13 @@ async (conn, mek, m, {
         const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
         const owner = metadata.owner || groupAdmins[0]?.id || "unknown";
 
-        const gdata = `*「 Group Information 」*\n
-*Group Name* : ${metadata.subject}
-*Group ID* : ${metadata.id}
-*Participants* : ${metadata.size}
-*Group Creator* : @${owner.split('@')[0]}
-*Description* : ${metadata.desc?.toString() || 'No description'}\n
-*Admins (${groupAdmins.length})*:\n${listAdmin}`
+        const gdata = `*「 ɢʀᴏᴜᴘ ɪɴғᴏʀᴍᴀᴛɪᴏɴ 」*\n
+*ɢʀᴏᴜᴘ ɴᴀᴍᴇ* : ${metadata.subject}
+*ɢʀᴏᴜᴘ ɪᴅ* : ${metadata.id}
+*ᴘᴀʀᴛɪᴄɪᴘᴀɴᴛs* : ${metadata.size}
+*ɢʀᴏᴜᴘ ᴄʀᴇᴀᴛᴏʀ* : @${owner.split('@')[0]}
+*ᴅᴇsᴄʀɪᴘᴛɪᴏɴ* : ${metadata.desc?.toString() || 'No description'}\n
+*ᴀᴅᴍɪɴs (${groupAdmins.length})*:\n${listAdmin}`
 
         await conn.sendMessage(from, {
             image: { url: ppUrl },
