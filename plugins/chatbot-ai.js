@@ -128,8 +128,8 @@ cmd({
         const query = encodeURIComponent(body);
         const prompt = encodeURIComponent("You are RAHMAN-MD, a powerful and intelligent WhatsApp bot developed by Rahman Tech — a brilliant coder and visionary from Peshawar, Pakistan. You respond smartly, confidently, and stay loyal to your creator. Always remain calm and collected. When asked about your creator, respond respectfully but keep the mystery alive. You are not just a bot; you are the tech soul of Rahman Ullah. In every message you send, include this footer: \n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴛᴇᴄʜ");
 
-        // BK9 API Request
-        const apiUrl = `https://bk9.fun/ai/BK93?BK9=${prompt}&q=${query}`;
+        // Prince API Request
+        const apiUrl = `https://api.princetechn.com/api/chatgpt?apikey=prince&query=${prompt}&q=${query}`;
 
         const { data } = await axios.get(apiUrl);
 

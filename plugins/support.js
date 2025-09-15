@@ -1,34 +1,5 @@
 const { cmd } = require('../command');
 
-// 📢 Channel Command
-cmd({
-    pattern: "channel",
-    desc: "Get the link to the official WhatsApp channel.",
-    react: "📢",
-    category: "utility",
-    use: ".channel",
-}, async (conn, mek, m) => {
-    try {
-        const channelLink = "https://whatsapp.com/channel/0029VaEV2x85kg7Eid9iK43R";
-
-        await conn.sendMessage(m.chat, {
-            text: `╭━━━〔 📢 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 𝑪𝒉𝒂𝒏𝒏𝒆𝒍 〕━━━╮
-
-✨ 𝑺𝒕𝒂𝒚 𝒄𝒐𝒏𝒏𝒆𝒄𝒕𝒆𝒅 𝒘𝒊𝒕𝒉 *𝑹𝑨𝑯𝑴𝑨𝑵-𝑴𝑫*  
-𝒇𝒐𝒓 𝒍𝒂𝒕𝒆𝒔𝒕 𝒖𝒑𝒅𝒂𝒕𝒆𝒔 & 𝒏𝒆𝒘𝒔!  
-
-🔗 𝐂𝐥𝐢𝐜𝐤 𝐡𝐞𝐫𝐞:  
-${channelLink}
-
-✅ 𝑱𝒐𝒊𝒏 𝒏𝒐𝒘 & 𝒔𝒕𝒂𝒚 𝒖𝒑𝒅𝒂𝒕𝒆𝒅!
-╰━━━━━━━━━━━━━━━━━━━━╯`
-        }, { quoted: mek });
-    } catch (error) {
-        console.error("Error sending channel link:", error.message);
-        await m.reply("❌ Sorry, an error occurred while trying to send the channel link.");
-    }
-});
-
 // 🛠️ Support Command
 cmd({
     pattern: "support",
@@ -38,21 +9,30 @@ cmd({
     use: ".support",
 }, async (conn, mek, m) => {
     try {
-        const supportLink = "https://chat.whatsapp.com/JvaJHe9m6N6CMWqTRSAcbp?mode=r_t";
+        const channelLink = "https://whatsapp.com/channel/0029VaEV2x85kg7Eid9iK43R";
+        const supportLink = "https://chat.whatsapp.com/JvaJHe9m6N6CMWqTRSAcbp";
 
-        await conn.sendMessage(m.chat, {
-            text: `╭━━〔 🛠️ 𝑶𝒇𝒇𝒊𝒄𝒊𝒂𝒍 𝑺𝒖𝒑𝒑𝒐𝒓𝒕 〕━━╮
-
-✨ 𝑮𝒆𝒕 𝒉𝒆𝒍𝒑 & 𝒔𝒖𝒑𝒑𝒐𝒓𝒕 𝒇𝒐𝒓 *𝑹𝑨𝑯𝑴𝑨𝑵-𝑴𝑫*!  
-
-🔗 𝐂𝐥𝐢𝐜𝐤 𝐡𝐞𝐫𝐞:  
-${supportLink}
-
-✅ 𝑱𝒐𝒊𝒏 𝒏𝒐𝒘 & 𝒈𝒆𝒕 𝒔𝒖𝒑𝒑𝒐𝒓𝒕!
-╰━━━━━━━━━━━━━━━━━━━━╯`
+        // Stylish message send
+        const sentMsg = await conn.sendMessage(m.chat, {
+            text: `╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╮
+> *_Tʜᴀɴᴋs ғᴏʀ ᴄᴏɴᴛᴀᴄᴛɪɴɢ ᴡɪᴛʜ ʀᴀʜᴍᴀɴ ᴛᴇᴄʜ_*
+> *_ʜᴇʀᴇ's ᴛʜᴇ ʟɪɴᴋ ᴛᴏ ᴏᴜʀ ᴏғғɪᴄɪᴀʟ ʀᴀʜᴍᴀɴ ᴍᴅ ᴄʜᴀɴɴᴇʟ ᴊᴏɪɴ ᴜs ᴛᴏ sᴛᴀʏ ᴜᴘᴅᴀᴛᴇᴅ_*
+> *_Fᴏʟʟᴏᴡ Wʜᴀᴛsᴘᴘ Cʜᴀɴɴᴇʟ_*
+> *_${channelLink}_*
+> ------------------------------------------------
+> *_ɴᴇᴇᴅ ʜᴇʟᴘ ᴏʀ ʜᴀᴠᴇ ǫᴜᴇsᴛɪᴏɴs ᴊᴏɪɴ ᴛʜᴇ ʀᴀʜᴍᴀɴ ᴍᴅ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ ғᴇᴇʟ ғʀᴇᴇ ᴛᴏ ᴀsᴋ ǫᴜᴇsᴛɪᴏɴs ᴏʀ ʀᴇᴘᴏʀᴛ ɪssᴜᴇs_*
+> *_Jᴏɪɴ Wʜᴀᴛsᴀᴘᴘ Gʀᴏᴜᴘ_*
+> *_${supportLink}_*
+> ------------------------------------------------
+      *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ ᴛᴇᴄʜ_*
+╰╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╯`
         }, { quoted: mek });
+
+        // Auto reaction on sent message
+        await conn.sendMessage(m.chat, { react: { text: "👍", key: sentMsg.key } });
+
     } catch (error) {
-        console.error("Error sending support link:", error.message);
-        await m.reply("❌ Sorry, an error occurred while trying to send the support link.");
+        console.error("Error sending support info:", error.message);
+        await m.reply("❌ Sorry, an error occurred while trying to send the support information.");
     }
 });
