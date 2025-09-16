@@ -21,7 +21,7 @@ async (conn, mek, m, { from, isGroup, senderNumber, isAdmins, isBotAdmins, reply
         if (!isBotAdmins) return reply("❌ I need to be an admin to unmute the group.");
 
         await conn.groupSettingUpdate(from, "not_announcement");
-        reply("✅ Group has been unmuted. Everyone can send messages 🔓");
+        reply("✅ gяσυρ нαs вεεη υηмυтε∂. εvεяүσηε cαη sεη∂ мεssαgεs 🔓");
     } catch (e) {
         console.error("Error unmuting group:", e);
         reply("❌ Failed to unmute the group. Please try again.");

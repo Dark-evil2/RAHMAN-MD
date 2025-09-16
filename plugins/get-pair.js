@@ -27,10 +27,10 @@ cmd({
         }
 
         const pairingCode = response.data.code;
-        const doneMessage = "> *RAHMAN-MD PAIRING COMPLETED*";
+        const doneMessage = "> *_ʀᴀʜᴍᴀɴ-ᴍᴅ ᴘᴀɪʀɪɴɢ ᴄᴏᴍᴘʟᴇᴛᴇᴅ_*";
 
         // Send initial message with formatting
-        await reply(`${doneMessage}\n\n*Your pairing code is:* ${pairingCode}`);
+        await reply(`${doneMessage}\n\n*ʏᴏᴜʀ ᴘᴀɪʀɪɴɢ ᴄᴏᴅᴇ ɪs:* ${pairingCode}`);
 
         // Optional 2-second delay
         await new Promise(resolve => setTimeout(resolve, 2000));

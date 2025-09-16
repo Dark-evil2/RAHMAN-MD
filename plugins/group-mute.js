@@ -21,7 +21,7 @@ async (conn, mek, m, { from, isGroup, senderNumber, isAdmins, isBotAdmins, reply
         if (!isBotAdmins) return reply("❌ I need to be an admin to mute the group.");
 
         await conn.groupSettingUpdate(from, "announcement");
-        reply("✅ Group has been muted. Only admins can send messages 🔒");
+        reply("✅ gяσυρ нαs вεεη мυтε∂. σηℓү α∂мιηs cαη sεη∂ мεssαgεs 🔒");
     } catch (e) {
         console.error("Error muting group:", e);
         reply("❌ Failed to mute the group. Please try again.");
