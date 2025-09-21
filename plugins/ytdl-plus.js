@@ -16,7 +16,7 @@ cmd({
     // ⏳ Processing reaction
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const url = `https://apis.davidcyriltech.my.id/song?query=${encodeURIComponent(q)}`;
+    const url = `https://gtech-api-xtp1.onrender.com/api/video/yt?apikey=APIKEY&url=${encodeURIComponent(q)}`;
     const res = await fetch(url);
     const data = await res.json();
 

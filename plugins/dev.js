@@ -27,7 +27,7 @@ async (conn, mek, m, { from, pushName }) => {
         });
 
         await conn.sendMessage(from, {
-            image: { url: 'https://files.catbox.moe/t3p1at.jpg' },
+            image: { url: 'https://files.catbox.moe/o8gic9.jpg' },
             caption: `*╭ׂ┄─ׅ─ׂ┄─ׂ┄─ׂ┄─ׂ┄─ׅ─ׂ┄─────᛭*
 *│  ̇─̣─̇─̣〘𝐑𝐀𝐇𝐌𝐀𝐍-𝐌𝐃〙̣─̇─̣─̇*
 *├┅┅┅┅┈┈┈┈┈┈┈┈┅┅┅┅┅┅◆*
@@ -53,7 +53,7 @@ async (conn, mek, m, { from, pushName }) => {
         }, { quoted: mek });
 
         await conn.sendMessage(from, {
-            audio: { url: 'https://files.catbox.moe/k0em5t.mp3' },
+            audio: { url: 'https://files.catbox.moe/efuhir.mp3' },
             mimetype: 'audio/mpeg',
             ptt: true
         }, { quoted: mek });

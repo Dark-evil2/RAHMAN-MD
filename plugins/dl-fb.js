@@ -1,12 +1,12 @@
 const axios = require("axios");
 const { cmd } = require("../command");
 
-// Facebook Downloader Sandarux
+// Facebook Downloader Prince 
 cmd({
   pattern: "fb",
   alias: ["facebook", "fbdl"],
   react: '📥',
-  desc: "Download videos from Facebook (Nexoracle API v1)",
+  desc: "Download videos from Facebook (PRINCE API)",
   category: "download",
   use: ".fb <Facebook video URL>",
   filename: __filename
@@ -19,7 +19,7 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const apiUrl = `https://apis.sandarux.sbs/api/fbnew/facebook?url=${encodeURIComponent(fbUrl)}`;
+    const apiUrl = `https://api.princetechn.com/api/download/facebook?apikey=prince&url=${encodeURIComponent(fbUrl)}`;
     const response = await axios.get(apiUrl);
 
     if (!response.data || !response.data.result || !response.data.result[0]) {
@@ -42,12 +42,12 @@ cmd({
   }
 });
 
-// Facebook Downloader Sandarux
+// Facebook Downloader 
 cmd({
   pattern: "fb2",
   alias: ["facebook2", "fbvideo2"],
   react: '📥',
-  desc: "Download videos from Facebook (Nexoracle API v2)",
+  desc: "Download videos from Facebook",
   category: "download",
   use: ".fb2 <Facebook video URL>",
   filename: __filename
@@ -60,7 +60,7 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const apiUrl = `https://apis.sandarux.sbs/api/download/fbdown?url=${encodeURIComponent(fbUrl)}`;
+    const apiUrl = `https://gtech-api-xtp1.onrender.com/api/download/fb?url=${encodeURIComponent(fbUrl)}`;
     const response = await axios.get(apiUrl);
 
     if (!response.data || !response.data.result || !response.data.result[0]) {
@@ -83,12 +83,12 @@ cmd({
   }
 });
 
-// Facebook Downloader v3 (DavidCyril API)
+// Facebook Downloader 
 cmd({
   pattern: "fb3",
   alias: ["facebook3"],
   react: '📥',
-  desc: "Download videos from Facebook (DavidCyril API)",
+  desc: "Download videos from Facebook",
   category: "download",
   use: ".fb3 <Facebook video URL>",
   filename: __filename
@@ -101,7 +101,7 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const apiUrl = `https://apis.davidcyriltech.my.id/facebook3?url=${encodeURIComponent(fbUrl)}&apikey=your_api_key_here`;
+    const apiUrl = `https://gtech-api-xtp1.onrender.com/api/dl/facebook?apikey=APIKEY&url=${encodeURIComponent(fbUrl)}&apikey=your_api_key_here`;
     const response = await axios.get(apiUrl);
 
     if (!response.data || !response.data.results || !response.data.results.download) {

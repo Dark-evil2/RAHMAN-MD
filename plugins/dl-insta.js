@@ -32,7 +32,7 @@ cmd({
         for (const item of response.data.data) {
             await conn.sendMessage(from, {
                 [item.type === 'video' ? 'video' : 'image']: { url: item.url },
-                caption: `‎*_ɪɴsᴛᴀɢʀᴀᴍ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
+                caption: `‎*_ʀᴀʜᴍᴀɴ-ᴍᴅ ɪɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
 ‎*╭──────────────━┈⍟*
 ‎┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
 ‎*╰──────────────━┈⍟*

@@ -66,7 +66,7 @@ cmd({
     await sleep(1000);
 
     // API request
-    const apiUrl = `https://apis.davidcyriltech.my.id/ssweb?url=${encodeURIComponent(url)}`;
+    const apiUrl = `https://api.siputzx.my.id/api/tools/ssweb?url=${encodeURIComponent(url)}`;
     const response = await axios.get(apiUrl);
 
     if (!response.data || !response.data.result) {

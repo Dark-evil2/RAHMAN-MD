@@ -1,23 +1,25 @@
 const config = require('../config');
 const { cmd } = require('../command');
-const fetch = require("node-fetch");
-const { ytsearch } = require('@dark-yasiya/yt-dl.js'); 
+const { ytsearch, ytmp3, ytmp4 } = require('@dark-yasiya/yt-dl.js'); 
 
-// 🎬 YouTube Video Downloader (song) 
+// video
+
 cmd({
-    pattern: "song4",
-    alias: ["video2", "ytv2"],
+    pattern: "song3",
+    alias: ["video3", "ytv3"],
     react: "🎬",
     desc: "Download YouTube video",
     category: "downloader",
-    use: ".song <query/url>",
+    use: ".mp4 <query/url>",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply("🎬 Please provide video name/URL");
         
+        // 1. Indicate processing
         await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
         
+        // 2. Search YouTube
         const yt = await ytsearch(q);
         if (!yt?.results?.length) {
             await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
@@ -25,17 +27,18 @@ cmd({
         }
         
         const vid = yt.results[0];
-        const apiKey = config.API_KEY || "58b3609c238b2b6bb6";
-        const api = `https://api.nexoracle.com/downloader/yt-video2?apikey=${apiKey}&url=${encodeURIComponent(vid.url)}`;
         
+        // 3. Fetch video
+        const api = `https://izumiiiiiiii.dpdns.org/downloader/youtube?url=${encodeURIComponent(vid.url)}`;
         const res = await fetch(api);
         const json = await res.json();
         
-        if (!json?.status || !json.result?.url) {
+        if (!json?.data?.downloadURL) {
             await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
             return reply("Download failed");
         }
         
+        // 4. Create stylish caption
         const caption = `
 ╭─〔*ʀᴀʜᴍᴀɴ-ᴍᴅ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*〕
 ├─▸ *📌 ᴛɪᴛʟᴇ:* ${vid.title}
@@ -43,12 +46,14 @@ cmd({
 ├─▸ *👀 ᴠɪᴇᴡs:* ${vid.views}
 ├─▸ *👤 ᴀᴜᴛʜᴏʀ:* ${vid.author.name}
 ╰──➤ *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ*`;
-
+        
+        // 5. Send video with formatted caption
         await conn.sendMessage(from, {
-            video: { url: json.result.url },
+            video: { url: json.data.downloadURL },
             caption: caption
         }, { quoted: mek });
         
+        // 6. Success reaction
         await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
         
     } catch (e) {
@@ -58,35 +63,35 @@ cmd({
     }
 });
 
-// 🎥 YouTube Video Downloader 
+
+
 cmd({ 
-    pattern: "video", 
-    alias: ["song", "ytv"], 
+    pattern: "video2", 
+    alias: ["song2", "ytv2"], 
     react: "🎥", 
-    desc: "Download YouTube video (DavidCyrilTech API)", 
+    desc: "Download Youtube song", 
     category: "main", 
-    use: ".video <query/url>", 
+    use: '.song < Yt url or Name >', 
     filename: __filename 
-}, async (conn, mek, m, { from, q, reply }) => { 
+}, async (conn, mek, m, { from, prefix, quoted, q, reply }) => { 
     try { 
         if (!q) return await reply("Please provide a YouTube URL or song name.");
         
         const yt = await ytsearch(q);
-        if (!yt.results.length) return reply("No results found!");
+        if (yt.results.length < 1) return reply("No results found!");
         
-        const yts = yt.results[0];
-        // 🔑 Fixed API (DavidCyrilTech)
-        const apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
+        let yts = yt.results[0];  
+        let apiUrl = `${izumi.baseURL}/downloader/youtube?url=${encodeURIComponent(yts.url)}`;
         
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+        let response = await fetch(apiUrl);
+        let data = await response.json();
         
-        if (!data.status || !data.result?.url) {
+        if (data.status !== 200 || !data.success || !data.result.download_url) {
             return reply("Failed to fetch the video. Please try again later.");
         }
         
-        const ytmsg = 
-`‎*_ʏᴛ ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
+        let ytmsg = 
+`**_ʏᴛ ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
 ‎*╭━━━━━━━━━━━━━━━━━━๏*
 ‎*┇*๏ *ᴛɪᴛʟᴇ:* ${yts.title}
 ‎*┇*๏ *ᴅᴜʀᴀᴛɪᴏɴ:* ${yts.timestamp}
@@ -97,14 +102,14 @@ cmd({
 ‎┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
 ‎*╰────────────────━┈⍟*`;
 
-        // Send details
-        await conn.sendMessage(from, { image: { url: yts.thumbnail }, caption: ytmsg }, { quoted: mek });
+        // Send video details
+        await conn.sendMessage(from, { image: { url: data.result.thumbnail || '' }, caption: ytmsg }, { quoted: mek });
         
-        // Send video
-        await conn.sendMessage(from, { video: { url: data.result.url }, mimetype: "video/mp4" }, { quoted: mek });
+        // Send video file
+        await conn.sendMessage(from, { video: { url: data.result.download_url }, mimetype: "video/mp4" }, { quoted: mek });
         
     } catch (e) {
         console.log(e);
         reply("An error occurred. Please try again later.");
     }
-});
+});  

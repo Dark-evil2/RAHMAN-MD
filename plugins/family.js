@@ -23,11 +23,17 @@ cmd({
 ‎         *•────────────•⟢*`;
 
     try {
-        // Envoi de la réponse avec l'image et la liste de la famille
         await conn.sendMessage(m.chat, {
-            image: { url: "https://files.catbox.moe/84jssf.jpg" },
+            image: { url: "https://files.catbox.moe/o8gic9.jpg" },
             caption: familyList.trim()
         }, { quoted: mek });
+
+        await conn.sendMessage(m.chat, {
+            audio: { url: "https://files.catbox.moe/9akurv.mp3" },
+            mimetype: "audio/mp4",
+            ptt: false
+        }, { quoted: mek });
+
     } catch (error) {
         console.error(error);
         reply("❌ *An error occurred while fetching the family list. Please try again.*");

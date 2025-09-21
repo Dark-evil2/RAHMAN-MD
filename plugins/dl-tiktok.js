@@ -31,8 +31,8 @@ async (conn, mek, m, { from, args, q, reply }) => {
 ‎*┋*💬 *ᴄᴏᴍᴍᴇɴᴛs:* ${comment}
 ‎*┋*🔁 *sʜᴀʀᴇs:* ${share}
 ‎*╰───────────────━┈⍟*
-‎*╭────◉◉◉─────────៚*
-‎  *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_*
+*╭────◉◉◉─────────៚*
+‎*┋* *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
 ‎*╰────◉◉◉─────────៚*`;
         
         await conn.sendMessage(from, {
@@ -66,7 +66,7 @@ cmd({
         await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
         // Fetch video from BK9 API
-        const { data } = await axios.get(`https://bk9.fun/download/tiktok2?url=${encodeURIComponent(url)}`);
+        const { data } = await axios.get(`https://api.dreaded.site/api/tiktok?url=${encodeURIComponent(url)}`);
         
         if (!data?.status || !data.BK9?.video?.noWatermark) {
             throw new Error("No video found in API response");
@@ -107,7 +107,7 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: "⏳", key: m.key } });
 
-    const apiUrl = `https://jawad-tech.vercel.app/download/tiktok?url=${encodeURIComponent(url)}`;
+    const apiUrl = `https://api.princetechn.com/api/download/tiktokdlv3?apikey=prince_tech_api_azfsbshfb&url=${encodeURIComponent(url)}`;
     const { data } = await axios.get(apiUrl);
 
     if (!data.status || !data.result || !data.result.length) {

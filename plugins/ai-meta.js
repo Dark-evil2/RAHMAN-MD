@@ -32,7 +32,7 @@ async (conn, mek, m, { from, q, reply }) => {
         await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
 
         // Reply with AI message
-        await reply(`💬 *Meta AI:* ${data.response}`);
+        await reply(`💬 *Rahman Ai:* ${data.response}`);
 
     } catch (e) {
         console.error("MetaAI Error:", e);
