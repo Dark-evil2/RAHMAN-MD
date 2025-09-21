@@ -17,7 +17,7 @@ cmd({
 }) => {
   try {
     if (!_0x4b1135) {
-      return _0x13cbf0("Please provide a YouTube link or search query.\n\nExample: .play Pasoori");
+      return _0x13cbf0("Please provide a YouTube link or search query.\n\nExample: .play madine wale");
     }
     let _0x2d6fc6;
     if (_0x4b1135.includes('youtube.com') || _0x4b1135.includes("youtu.be")) {
