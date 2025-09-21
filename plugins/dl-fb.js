@@ -3,8 +3,8 @@ const { cmd } = require("../command");
 
 // Facebook Downloader Prince 
 cmd({
-  pattern: "fb",
-  alias: ["facebook", "fbdl"],
+  pattern: "fb4",
+  alias: ["facebook4", "fbdl4"],
   react: '📥',
   desc: "Download videos from Facebook (PRINCE API)",
   category: "download",

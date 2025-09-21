@@ -44,7 +44,7 @@ cmd({
 });
 
 cmd({
-  pattern: "play4",
+  pattern: "play",
   alias: ["ytmp3"],
   desc: "Download YouTube song (MP3)",
   category: "main",
@@ -75,7 +75,14 @@ cmd({
       fileName: `${song.title}.mp3`
     }, { quoted: mek });
 
-    await reply(`🎵 *${song.title}*\n Downloaded Successfully ✅`);
+    await reply(`‎*_ʀᴀʜᴍᴀɴ-ᴍᴅ ʏᴛ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
+‎*╭───────────────━┈⍟*
+‎*👤 *ᴛɪᴛʟᴇ: ${song.title}*
+‎
+‎*╰───────────────━┈⍟*
+‎*╭────◉◉◉─────────៚*
+‎*┋* *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
+‎*╰────◉◉◉─────────៚*`);
 
     // ✅ Success reaction
     await conn.sendMessage(from, { react: { text: '✅', key: m.key } });

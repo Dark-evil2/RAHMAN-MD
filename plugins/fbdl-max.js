@@ -3,8 +3,8 @@ const { cmd } = require("../command");
 
 
 cmd({
-  pattern: "fb4",
-  alias: ["facebook4", "fbdl4"],
+  pattern: "fb",
+  alias: ["facebook", "fbdl"],
   react: '📥',
   desc: "Download videos from Facebook (API v4)",
   category: "download",
@@ -35,11 +35,11 @@ cmd({
 
     if (!video) return reply("❌ Video not found in the response.");
 
-    await reply(`Downloading video Please wait`);
+    await reply(`𝑹𝒂𝒉𝒎𝒂𝒏-𝒎𝒅 𝒖𝒑𝒍𝒐𝒂𝒅𝒊𝒏𝒈 𝒚𝒐𝒖𝒓 𝒗𝒊𝒅𝒆𝒐...`);
 
     await conn.sendMessage(from, {
       video: { url: video.url },
-      caption: `‎*_ғᴀᴄᴇʙᴏᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_* 🎥
+      caption: `‎*_ʀᴀʜᴍᴀɴ-ᴍᴅ ғʙ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
 ‎*╭────────────────━┈⍟*
 ‎*┋* *ϙᴜᴀʟɪᴛʏ:* ${video.quality} 
 ‎*╰────────────────━┈⍟*
