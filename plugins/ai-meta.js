@@ -5,7 +5,7 @@ cmd({
     pattern: "metaai",
     alias: ["rahman", "meta"],
     react: "🤖",
-    desc: "Talk with Meta AI",
+    desc: "Talk with Rahman AI",
     category: "ai",
     use: '.metaai <your question>',
     filename: __filename

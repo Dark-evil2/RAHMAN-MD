@@ -32,7 +32,7 @@ cmd({
         // Send the image
         await conn.sendMessage(from, {
             image: { url: imageUrl },
-            caption: '> Powered By IMMU-MD '
+            caption: '‎*_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_*'
         }, { quoted: mek });
 
     } catch (error) {
