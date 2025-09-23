@@ -60,7 +60,7 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const apiUrl = `https://gtech-api-xtp1.onrender.com/api/download/fb?url=${encodeURIComponent(fbUrl)}`;
+    const apiUrl = `https://jawad-tech.vercel.app/downloader?url=${encodeURIComponent(fbUrl)}`;
     const response = await axios.get(apiUrl);
 
     if (!response.data || !response.data.result || !response.data.result[0]) {

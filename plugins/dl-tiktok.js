@@ -48,8 +48,8 @@ async (conn, mek, m, { from, args, q, reply }) => {
 });
 
 cmd({
-    pattern: "tt2",
-    alias: ["ttdl2", "ttv2", "tiktok2"],
+    pattern: "tt3",
+    alias: ["ttdl3", "ttv3", "tiktok3"],
     desc: "Download TikTok video without watermark",
     category: "downloader",
     react: "⬇️",
@@ -91,8 +91,8 @@ cmd({
 });
                 
 cmd({
-  pattern: "tt3",
-  alias: ["tiktok3", "ttdl3"],
+  pattern: "tt2",
+  alias: ["tiktok2", "ttdl2"],
   react: "📥",
   desc: "Download TikTok video (API v4)",
   category: "download",
@@ -107,7 +107,7 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: "⏳", key: m.key } });
 
-    const apiUrl = `https://api.princetechn.com/api/download/tiktokdlv3?apikey=prince_tech_api_azfsbshfb&url=${encodeURIComponent(url)}`;
+    const apiUrl = `https://delirius-apiofc.vercel.app/download/tiktok?url=${encodeURIComponent(url)}`;
     const { data } = await axios.get(apiUrl);
 
     if (!data.status || !data.result || !data.result.length) {
@@ -122,13 +122,13 @@ cmd({
     await conn.sendMessage(from, {
       video: { url: video },
       caption: `‎*_ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
-‎*╭───────────────────⦿*
+‎*╭──────────────────⦿*
 ‎*│✦👤 Aᴜᴛʜᴏʀ:* ${author}
 ‎*│✦💬 Cᴀᴘᴛɪᴏɴ:* ${caption}
-*╰───────────────────⦿* 
-‎*╭─────────────────━┈⍟*
+*╰──────────────────⦿* 
+‎*╭────────────────━┈⍟*
 ‎┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
-‎*╰─────────────────━┈⍟*‎`
+‎*╰────────────────━┈⍟*‎`
     }, { quoted: mek });
 
     await conn.sendMessage(from, { react: { text: "✅", key: m.key } });
