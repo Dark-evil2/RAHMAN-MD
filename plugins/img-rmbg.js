@@ -73,7 +73,10 @@ cmd({
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: `✅ Background Removed Successfully!\n\n*╭───────────────━┈⍟*\n┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_*\n*╰───────────────━┈⍟*`,
+      caption: `*_ʀᴀʜᴍᴀɴ-ᴍᴅ ʀᴍʙɢ ʀᴇᴍᴏᴠᴇʀ_*
+*╭──────────────━┈⍟*
+┋ *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_*
+*╰──────────────━┈⍟*`,
     });
 
   } catch (error) {

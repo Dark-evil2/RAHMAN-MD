@@ -28,13 +28,13 @@ async (conn, mek, m, { from, l, args, q, isGroup, isAdmins, reply }) => {
             return reply('*Select:*\nsecond\nminute\nhour\nday\n\n*Example:*\n.opentime 10 second')
         }
 
-        reply(`✅ Open time set for *${q}*. Group will open after this duration.`)
+        reply(`✅ ᴏᴘᴇɴ ᴛɪᴍᴇ sᴇᴛ ғᴏʀ *${q}*. ɢʀᴏᴜᴘ ᴡɪʟʟ ᴏᴘᴇɴ ᴀғᴛᴇʀ ᴛʜɪs ᴅᴜʀᴀᴛɪᴏɴ.`)
 
-        // Reaction ⏳ lagao
+        // Reaction ⏳ 
         await conn.sendMessage(from, { react: { text: `⏳`, key: mek.key } })
 
         setTimeout(async () => {
-            const openMsg = `*_OPEN TIME_* 🔓\nGroup has been opened by *RAHMAN-MD*.\nNow members can send messages.`
+            const openMsg = `*_ᴏᴘᴇɴ ᴛɪᴍᴇ_* 🔓\n*_ɢʀᴏᴜᴘ ʜᴀs ʙᴇᴇɴ ᴏᴘᴇɴᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_*\n*_ɴᴏᴡ ᴍᴇᴍʙᴇʀs ᴄᴀɴ sᴇɴᴅ ᴍᴇssᴀɢᴇs._*`
 
             await conn.groupSettingUpdate(from, 'not_announcement')
             reply(openMsg)
@@ -76,13 +76,13 @@ async (conn, mek, m, { from, l, args, q, isGroup, isAdmins, reply }) => {
             return reply('*Select:*\nsecond\nminute\nhour\nday\n\n*Example:*\n.closetime 5 minute')
         }
 
-        reply(`✅ Close time set for *${q}*. Group will close after this duration.`)
+        reply(`✅ ᴄʟᴏsᴇ ᴛɪᴍᴇ sᴇᴛ ғᴏʀ *${q}*. ɢʀᴏᴜᴘ ᴡɪʟʟ ᴄʟᴏsᴇ ᴀғᴛᴇʀ ᴛʜɪs ᴅᴜʀᴀᴛɪᴏɴ.`)
 
-        // Reaction ⏳ lagao
+        // Reaction ⏳ 
         await conn.sendMessage(from, { react: { text: `⏳`, key: mek.key } })
 
         setTimeout(async () => {
-            const closeMsg = `*_CLOSE TIME_* 🔐\nGroup has been closed by *RAHMAN-MD*.\nNow only admins can send messages.`
+            const closeMsg = `*_ᴄʟᴏsᴇ ᴛɪᴍᴇ_* 🔐\n*_ɢʀᴏᴜᴘ ʜᴀs ʙᴇᴇɴ ᴄʟᴏsᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_*.\n*_ɴᴏᴡ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ sᴇɴᴅ ᴍᴇssᴀɢᴇs.._*`
 
             await conn.groupSettingUpdate(from, 'announcement')
             reply(closeMsg)

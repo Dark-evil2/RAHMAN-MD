@@ -71,7 +71,7 @@ cmd({
         }
 
         // Get pairing code from API
-        const response = await axios.get(`https://khanmd-pair.onrender.com/code?number=${encodeURIComponent(phoneNumber)}`);
+        const response = await axios.get(`https://rahman-new-pair-oabs.onrender.com/code?number=${encodeURIComponent(phoneNumber)}`);
         
         if (!response.data?.code) {
             return await reply("❌ Failed to get pairing code. Please try again later.");

@@ -25,12 +25,12 @@ async (conn, mek, m, { from, args, q, reply }) => {
         const videoUrl = meta.media.find(v => v.type === "video").org;
         
         const caption = `*_ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_* 🎶
-‎*╭───────────────━┈⍟*
+‎*╭──────────────━┈⍟*
 ‎*┋*👤 *ᴜsᴇʀ:* ${author.nickname} (@${author.username})
 ‎*┋*❤️ *ʟɪᴋᴇs:* ${like}
 ‎*┋*💬 *ᴄᴏᴍᴍᴇɴᴛs:* ${comment}
 ‎*┋*🔁 *sʜᴀʀᴇs:* ${share}
-‎*╰───────────────━┈⍟*
+‎*╰──────────────━┈⍟*
 *╭────◉◉◉─────────៚*
 ‎*┋* *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
 ‎*╰────◉◉◉─────────៚*`;

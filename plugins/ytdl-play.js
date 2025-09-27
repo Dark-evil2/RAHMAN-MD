@@ -105,7 +105,7 @@ cmd({
         if (!q) return reply("Please provide a song name\nExample: .play2 Tum Hi Ho");
 
         // Step 1: Search YouTube
-        await conn.sendMessage(from, { text: "🔍 Searching for your song..." }, { quoted: mek });
+        await conn.sendMessage(from, { text: "*_ᴜᴘʟᴏᴀᴅɪɴɢ ʏᴏᴜʀ ᴀᴜᴅɪᴏ..._*" }, { quoted: mek });
         const yt = await ytsearch(q);
         if (!yt?.results?.length) return reply("❌ No results found. Try a different search term.");
 
@@ -130,7 +130,7 @@ cmd({
         }, { quoted: mek });
 
         // Step 3: Fetch audio URL
-        const apiUrl = `https://api-aswin-sparky.koyeb.app/api/downloader/song?search=${encodeURIComponent(vid.url)}`;
+        const apiUrl = `https://apis.davidcyriltech.my.id/play?query=${encodeURIComponent(vid.url)}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 
