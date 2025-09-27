@@ -48,7 +48,7 @@ cmd({
   alias: ["ytmp3"],
   desc: "Download YouTube song (MP3)",
   category: "main",
-  use: ".playx <song name>",
+  use: ".play <song name>",
   react: "🔰",
   filename: __filename
 }, async (conn, mek, m, { from, reply, q }) => {
@@ -69,10 +69,20 @@ cmd({
 
     const song = data.result;
 
+    // Thumbnail buffer
+    let thumb;
+    try {
+      const tRes = await fetch(song.thumbnail);
+      thumb = Buffer.from(await tRes.arrayBuffer());
+    } catch (e) {
+      thumb = null;
+    }
+
     await conn.sendMessage(from, {
       audio: { url: song.download_url },
       mimetype: "audio/mpeg",
-      fileName: `${song.title}.mp3`
+      fileName: `${song.title}.mp3`,
+      jpegThumbnail: thumb || undefined
     }, { quoted: mek });
 
     await reply(`‎*_ʀᴀʜᴍᴀɴ-ᴍᴅ ʏᴛ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_*
@@ -83,13 +93,8 @@ cmd({
 ‎*╭────◉◉◉─────────៚*
 ‎*┋* *_ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʀᴀʜᴍᴀɴ-ᴍᴅ_* 
 ‎*╰────◉◉◉─────────៚*`);
-
-    // ✅ Success reaction
-    await conn.sendMessage(from, { react: { text: '✅', key: m.key } });
-
-  } catch (err) {
-    console.error(err);
-    await conn.sendMessage(from, { react: { text: '❌', key: m.key } });
-    reply("⚠️ Error occurred. Try again.");
+  } catch (e) {
+    console.error("❌ Play command error:", e);
+    reply("❌ Error while fetching audio.");
   }
 });

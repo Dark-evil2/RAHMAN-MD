@@ -29,7 +29,7 @@ cmd({
         const vid = yt.results[0];
         
         // 3. Fetch video
-        const api = `https://izumiiiiiiii.dpdns.org/downloader/youtube?url=${encodeURIComponent(vid.url)}`;
+        const api = `https://gtech-api-xtp1.onrender.com/api/video/yt?apikey=APIKEY&url=${encodeURIComponent(vid.url)}`;
         const res = await fetch(api);
         const json = await res.json();
         
